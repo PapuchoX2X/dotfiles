@@ -1,0 +1,16 @@
+# Screens
+hdmi=`xrandr | grep ' connected' | grep 'HDMI' | awk '{print $1}'`
+
+if [ "$hdmi" = "HDMI-1-0" ]; then
+  xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1-0 --mode 1920x1080 --pos 1366x0 --rotate normal &
+else
+    xrandr --output eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1-0 --off &
+fi
+
+#BSPWM
+#if [[ $XDG_SESSION_DESKTOP = bspwm ]]; then
+ #   exec bspwm
+#fi
+if echo [[ $XDG_SESSION_DESKTOP=bspwm ]]; then
+    exec bspwm
+fi
